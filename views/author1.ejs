@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/main1.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-image-wrapper">
+              <img src="/author/images/Profile.png" alt="<%=user.name%>" />
+            </div>
+            <h2 class="profile-name"><%=user.name%></h2>
+            <p class="profile-role"><%=user.profession%></p>
+          </div>
+
+          <div class="social-bar">
+            <a href="#" class="social-link facebook">
+              <img src="/author/icons/facebook.svg" alt="Facebook">
+            </a>
+            <a href="#" class="social-link twitter">
+              <img src="/author/icons/twitter.svg" alt="Twitter">
+            </a>
+            <a href="#" class="social-link instagram">
+              <img src="/author/icons/instagram.svg" alt="Instagram">
+            </a>
+            <a href="#" class="social-link linkedin">
+              <img src="/author/icons/linkeding.svg" alt="LinkedIn">
+            </a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-item">
+            <span class="info-label">Age</span>
+            <span class="info-value"><%=user.age%></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Residence</span>
+            <span class="info-value"><%=user.residence%></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Freelance</span>
+            <span class="info-value highlight">Available</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Location</span>
+            <span class="info-value"><%=user.adress%></span>
+          </div>
+        </div>
+
+        <div class="skills-wrapper">
+          <div class="skills-card">
+            <h3 class="skills-title">Languages</h3>
+            <% user.languages.forEach((lang, i) => { %>
+              <div class="skill-item">
+                <div class="skill-header">
+                  <span class="skill-name"><%=lang%></span>
+                  <span class="skill-level"><%=[95, 85, 75][i]%>%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width:<%=[95, 85, 75][i]%>%"></div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+
+          <div class="skills-card">
+            <h3 class="skills-title">Professional Skills</h3>
+            <% user.skills.slice(0,4).forEach((skill, i) => { %>
+              <div class="skill-item">
+                <div class="skill-header">
+                  <span class="skill-name"><%=skill%></span>
+                  <span class="skill-level"><%=[90, 85, 80, 75][i]%>%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width:<%=[90, 85, 80, 75][i]%>%"></div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <nav class="top-nav">
+          <button class="theme-toggle">
+            <img src="/author/icons/night.svg" alt="Toggle theme">
+          </button>
+        </nav>
+
+        <section class="hero-section">
+          <div class="hero-content">
+            <h1 class="hero-title">
+              <span class="highlight">Creative</span> 
+              <%=user.profession%>
+            </h1>
+            <p class="hero-text">
+              Crafting digital experiences through clean code and innovative design
+            </p>
+            <div class="hero-actions">
+              <button class="primary-btn">
+                HIRE ME
+                <img src="/author/icons/Frame.svg" alt="">
+              </button>
+              <button class="secondary-btn">
+                DOWNLOAD CV
+              </button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="/author/images/user1.png" alt="Hero image">
+          </div>
+        </section>
+
+        <section class="services-section">
+          <div class="section-header">
+            <h2>My Services</h2>
+            <p>Specialized in bringing your digital ideas to life</p>
+          </div>
+
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">
+                <img src="/author/icons/web.svg" alt="Web Development">
+              </div>
+              <h3>Web Development</h3>
+              <p>Building responsive and performant web applications</p>
+              <a href="#" class="service-link">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <img src="/author/icons/Ui.svg" alt="UI/UX Design">
+              </div>
+              <h3>UI/UX Design</h3>
+              <p>Creating intuitive and beautiful user interfaces</p>
+              <a href="#" class="service-link">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <img src="/author/icons/game.svg" alt="Mobile Development">
+              </div>
+              <h3>Mobile Development</h3>
+              <p>Developing cross-platform mobile applications</p>
+              <a href="#" class="service-link">Learn More →</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
