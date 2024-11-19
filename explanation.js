@@ -82,3 +82,76 @@
 // false bo'lsa - faqat oddiy ma'lumotlarni qabul qiladi
 // Qisqa qilib aytganda, bu middleware HTML formalardan kelgan 
 // ma'lumotlarni serverda qulay ishlatish uchun xizmat qiladi.
+
+// 8. CALLBACK VA ASYNCHRONOUS FUNCTIONS:
+
+// Callback - boshqa funksiya ichida argument sifatida beriladigan funksiya
+// Asynchronous - kodning ketma-ketlikda emas, parallel ravishda ishlashi
+
+// CALLBACK MISOL:
+function getData(callback) {
+    setTimeout(() => {
+        const data = { name: "John", age: 25 };
+        callback(data);
+    }, 2000);
+}
+
+getData((result) => {
+    console.log(result); // 2 sekunddan keyin: { name: "John", age: 25 }
+});
+
+// ASYNC/AWAIT MISOL:
+async function fetchUser() {
+    try {
+        const response = await fetch('https://api.example.com/user');
+        const user = await response.json();
+        return user;
+    } catch (error) {
+        console.error('Xatolik:', error);
+    }
+}
+
+// PROMISE MISOL:
+const getDataPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        const data = { name: "John", age: 25 };
+        if (data) {
+            resolve(data);
+        } else {
+            reject("Ma'lumot topilmadi");
+        }
+    }, 2000);
+});
+
+// ASOSIY KALIT SO'ZLAR:
+// - async/await - asinxron funksiyalarni sinxron ko'rinishda yozish
+// - Promise - asinxron operatsiyalar uchun konteyner
+// - .then() - muvaffaqiyatli natija bilan ishlash
+// - .catch() - xatolarni ushlash
+// - try/catch - xatolarni boshqarish
+// - setTimeout/setInterval - vaqt bilan ishlash
+
+// REAL HAYOTIY MISOL:
+async function registerUser(userData) {
+    try {
+        // Foydalanuvchi ma'lumotlarini tekshirish
+        await validateUserData(userData);
+        
+        // Ma'lumotlar bazasiga saqlash
+        const newUser = await saveToDatabase(userData);
+        
+        // Email yuborish
+        await sendWelcomeEmail(newUser.email);
+        
+        return { success: true, user: newUser };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
+// Event Loop va CallStack:
+// 1. CallStack - sinxron kodlar ketma-ketligi
+// 2. Event Loop - asinxron kodlarni boshqarish mexanizmi
+// 3. Callback Queue - callback funksiyalar navbati
+// 4. Microtask Queue - Promise va async/await natijalar navbati
+
