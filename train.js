@@ -5,7 +5,6 @@ const countLetters = (letter,str) => {
 
 console.log(countLetters("e", "engineer"));
 
-
 //-------------Event Loop va Callback Functionlar----------- :
 
 // console. log ("Jack Ma maslahatlari");
