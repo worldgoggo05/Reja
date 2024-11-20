@@ -54,3 +54,47 @@ async function run() {
     console.log("Maslahat:", result);
 }
 run(); 
+
+
+// ---------Async function with .then((=>{})) .catch((=>{})) ---------
+// funcName(param).then((data) => {
+//     console.log("Maslahat:", data);
+// }).catch((err) => {
+//     console.log("ERROR:", err);
+// }); 
+// bu funksiya Callback Functiondan farqi setTimeout qo'yilmagan bo'lsada
+// synchronus functionlardan keyin amalga oshiriladi . Va single threadimizni band qilmaydi
+// Lekin bu 'callback hellga' sabab bo'lishi mumkin
+
+// ---------Async function with async & await ---------
+// async function run() {
+//     let result = await funcName(param);
+//     console.log("Maslahat:", result);
+// }
+// run(); 
+// bu funksiya callback hellni oldini oladi
+// va kodni yanada tushunarli va boshqarishni oson qiladi
+
+// Promise
+// Promise - bu function bir javobni olmasddan turib keyingi functionga o'tmaslikni ta'minlaydi
+// Ya'ni javobni kutib turadi
+
+// ---------setInterval ni Async function bilan ishlatsak---------
+async function runInterval() {
+    setInterval(() => {
+        console.log("Hello"); 
+    }, 1000);
+}
+// runInterval() funksiyasi Promise qaytaradi va await bilan kutib olinishi mumkin
+
+// Callback function bilan ishlatsak
+function withCallback(callback) {
+    setInterval(() => {
+        callback("Hello");
+    }, 1000);
+}
+// withCallback((message) => {
+//     console.log(message);
+// });
+// Callback function orqali natijani olish va qayta ishlash mumkin
+
