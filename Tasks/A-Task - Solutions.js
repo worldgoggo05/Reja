@@ -27,7 +27,7 @@ const countLettersRegex = (letter, str) => {
 console.log(countLettersRegex("e", "engineer")); 
 
 // ----
-// Alternative solution 3: Using for...of loop
+// Alternative solution 3: Using for...of loop  Big O(1)
 const countLettersLoop = (letter, str) => {
     let count = 0;
     for (let char of str) {
