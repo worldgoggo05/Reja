@@ -30,14 +30,6 @@ app.set("views", "views");
 app.set("view engine", "ejs");
 
 // 4 - Routing code
-// app.get("/hello", function (req, res) {
-//     res.end("<h1 style='color: red;'> HELLO WORLD</h1>");
-// });
-
-// app.get("/gift", function (req, res) {
-//     res.end("<h1 style='background-color: red;'> Siz sovg'alar sahifasidasiz </h1>");
-// });
-
 app.get("/author", (req, res) => {
     res.render("author", {user: user});
 });
@@ -47,12 +39,43 @@ app.get("/author1", (req, res) => {
 
 
 app.post ("/create-item", (req, res) => {
-    console.log(req);
-    res.json({ test: "success "});
+    console.log("User is logged in /create-item");
+    console. log (req.body);
+    const new_reja = req.body.item;
+    db.collection("plans").insertOne({reja: new_reja}, (err, data) => {
+        if(err) {
+            console.log(err);
+            res.end("Something went wrong!");
+        } else {
+            res.end("successfully added");
+        }
+    });
 });
 
 app.get("/", function (req, res) {
-    res.render("reja");
+    console.log("User is logged in /");
+    db.collection("plans")
+    .find()
+    .toArray ((err, data) => {
+        if (err) {
+            console.log(err);
+            res.end("Something went wrong!");
+        } else {
+            console.log(data);
+            res.render("reja", { items: data });
+        }
+    });
+});
+
+app.post("/delete-all", (req, res) => {
+    db.collection("plans").deleteMany({}, (err, data) => {
+        if(err) {
+            console.log(err);
+            res.status(500).json({ error: "Something went wrong!" });
+        } else {
+            res.json({ success: true });
+        }
+    });
 });
 
 module.exports = app;
