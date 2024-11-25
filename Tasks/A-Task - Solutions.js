@@ -1,19 +1,19 @@
 // ------------ A-TASK: --------------
-// My Solution 
+// My Solution - Big O(n)
 const countLetters = (letter, str) => {
     return str.split('').filter(char => char === letter).length
 }
 console.log(countLetters("e", "engineer"));
 
 // ----
-// Alternative solution 1: Using reduce
+// Alternative solution 1: Using reduce - Big O(n)
 const countLettersReduce = (letter, str) => {
     return str.split('').reduce((count, char) => char === letter ? count + 1 : count, 0);
 }
 console.log(countLettersReduce("e", "engineer"));
 
 // ----
-// Alternative solution 2: Using match with regex
+// Alternative solution 2: Using match with regex - Big O(n)
 const countLettersRegex = (letter, str) => {
     // Create a regex pattern to find all occurrences of the letter
     const regex = new RegExp(letter, 'g');
@@ -27,7 +27,7 @@ const countLettersRegex = (letter, str) => {
 console.log(countLettersRegex("e", "engineer")); 
 
 // ----
-// Alternative solution 3: Using for...of loop  Big O(1)
+// Alternative solution 3: Using for...of loop - Big O(n)
 const countLettersLoop = (letter, str) => {
     let count = 0;
     for (let char of str) {
