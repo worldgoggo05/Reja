@@ -3,6 +3,7 @@ const express = require ("express");
 const app = express();
 
 const fs = require("fs");
+const mongodb = require("mongodb");
 
 let user;
 fs.readFile("database/user.json", "utf-8", (err, data) => {
@@ -15,9 +16,6 @@ fs.readFile("database/user.json", "utf-8", (err, data) => {
 
 // MongoDB Call
 const db = require ("./server").db();
-
-
-
 
 // 1 - Kirish code
 app.use(express.static("public"));
@@ -38,6 +36,7 @@ app.get("/author1", (req, res) => {
 });
 
 
+// Create new item
 app.post ("/create-item", (req, res) => {
     console.log("User is logged in /create-item");
     console.log(req.body);
@@ -58,6 +57,9 @@ app.post ("/create-item", (req, res) => {
     });
 });
 
+
+
+// Read all items
 app.get("/", function (req, res) {
     console.log("User is logged in /");
     db.collection("plans")
@@ -73,6 +75,7 @@ app.get("/", function (req, res) {
     });
 });
 
+// Delete all items
 app.post("/delete-all", (req, res) => {
     db.collection("plans").deleteMany({}, (err, data) => {
         if(err) {
@@ -82,6 +85,37 @@ app.post("/delete-all", (req, res) => {
             res.json({ success: true });
         }
     });
+});
+
+// Delete single item
+app.post("/delete-item", (req, res) => {
+    const id = new mongodb.ObjectId(req.body.id);
+    db.collection("plans").deleteOne({_id: id}, (err, data) => {
+        if(err) {
+            console.log(err);
+            res.json({error: "Ochirishda xatolik yuz berdi"});
+        } else {
+            res.json({success: true});
+        }
+    });
+});
+
+// Edit/Update item
+app.post("/edit-item", (req, res) => {
+    const id = new mongodb.ObjectId(req.body.id);
+    db.collection("plans").findOneAndUpdate(
+        {_id: id},
+        {$set: {reja: req.body.new_reja}},
+        {returnDocument: 'after'},
+        (err, data) => {
+            if(err) {
+                console.log(err);
+                res.json({error: "Ozgartirishda xatolik yuz berdi"});
+            } else {
+                res.json({success: true});
+            }
+        }
+    );
 });
 
 module.exports = app;

@@ -46,3 +46,47 @@ document.querySelector(".delete-all").addEventListener("click", function() {
             });
     }
 });
+
+document.addEventListener("click", function(e) {
+    // Delete button
+    if(e.target.classList.contains("btn-delete")) {
+        if(confirm("O'chirishni xohlaysizmi?")) {
+            axios
+                .post("/delete-item", {id: e.target.getAttribute("data-id")})
+                .then((response) => {
+                    if(response.data.success) {
+                        e.target.parentElement.parentElement.remove();
+                    }
+                })
+                .catch((err) => {
+                    console.log("Xatolik yuz berdi");
+                });
+        }
+    }
+
+    // Edit button
+    if(e.target.classList.contains("btn-edit")) {
+        let userInput = prompt(
+            "O'zgartirish kiriting", 
+            e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+        );
+        
+        if(userInput) {
+            axios
+                .post("/edit-item", {
+                    id: e.target.getAttribute("data-id"),
+                    new_reja: userInput
+                })
+                .then((response) => {
+                    if(response.data.success) {
+                        e.target.parentElement.parentElement.querySelector(
+                            ".item-text"
+                        ).innerHTML = userInput;
+                    }
+                })
+                .catch((err) => {
+                    console.log("Xatolik yuz berdi");
+                });
+        }
+    }
+});
