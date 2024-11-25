@@ -129,7 +129,7 @@
                 <div class="d-flex">
                     <input
                         id="create-field"
-                        name="item"
+                        name="reja"
                         autofocus
                         autocomplete="off"
                         class="form-control"
@@ -159,19 +159,7 @@
             <button class="delete-all">Hamma Rejalarni O'chirish</button>
         </div>
     </div>
-
-    <script>
-    document.querySelector(".delete-all").addEventListener("click", function() {
-        if(confirm("Hamma rejalarni o'chirishni xohlaysizmi?")) {
-            fetch("/delete-all", { method: "POST" })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        location.reload();
-                    }
-                });
-        }
-    });
-    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/browser.js"></script>
 </body>
 </html>

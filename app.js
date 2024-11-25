@@ -40,14 +40,20 @@ app.get("/author1", (req, res) => {
 
 app.post ("/create-item", (req, res) => {
     console.log("User is logged in /create-item");
-    console. log (req.body);
-    const new_reja = req.body.item;
-    db.collection("plans").insertOne({reja: new_reja}, (err, data) => {
-        if(err) {
+    console.log(req.body);
+    const new_reja = req.body.reja;
+    db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
+        //console.log(data.ops);
+        // Check for errors
+        if (err) {
             console.log(err);
-            res.end("Something went wrong!");
+            res.json({ error: "Xatolik yuz berdi!" });
         } else {
-            res.end("successfully added");
+            // Send back the newly created item
+            res.json({ 
+                _id: data.insertedId, 
+                reja: new_reja
+            });
         }
     });
 });
