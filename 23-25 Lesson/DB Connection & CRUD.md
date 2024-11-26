@@ -10,35 +10,6 @@ MongoDB ulanish - bu ma'lumotlar bazasi bilan bog'lanish jarayoni
 
 Loyihamizda MongoDB ulanishi quyidagicha amalga oshiriladi:
 
-```javascript
-// MongoDB Atlas cloud serverdagi ma'lumotlar bazasiga ulanish uchun maxsus URL
-const connectionString = "mongodb+srv://<username>:<password>@cluster0.hxb9o.mongodb.net/Reja";
-
-// Ulanishni amalga oshirish
-mongodb.connect(connectionString, {
-    useNewUrlParser: true,  // Yangi URL parser ishlatish
-    useUnifiedTopology: true  // Yangi topology engine ishlatish
-}, (err, client) => {
-    if(err) console.log("MongoDB ulanishida xatolik");
-    else {
-        console.log("MongoDB ulanishi muvaffaqiyatli");
-        module.exports = client;
-        const app = require("./app");
-        const server = http.createServer(app);
-        let PORT = 3000;
-        server.listen(PORT, function() {
-            console.log(`Server ${PORT} portda ishga tushdi`);
-        });
-    }
-});
-```
-
-Muhim nuqtalar:
-- MongoDB Atlas (cloud ma'lumotlar bazasi) ishlatilmoqda
-- Ulanish sozlamalari xavfsizlik va samaradorlikni ta'minlaydi
-- Server faqat muvaffaqiyatli ulanishdan so'ng ishga tushadi
-- Ulanish boshqa fayllarda ishlatish uchun eksport qilinadi
-
 ## CRUD Operatsiyalari (app.js)
 
 ### Create (Yaratish) Operatsiyasi
