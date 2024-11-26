@@ -1,0 +1,22 @@
+const express = require('express');
+const serverless = require('serverless-http');
+const app = express();
+
+// existing routes
+app.post('/.netlify/functions/api/create-item', async (req, res) => {
+  //  create logic
+});
+
+app.post('/.netlify/functions/api/delete-item', async (req, res) => {
+  // delete logic
+});
+
+app.post('/.netlify/functions/api/edit-item', async (req, res) => {
+  // edit logic
+});
+
+app.post('/.netlify/functions/api/delete-all', async (req, res) => {
+  // delete-all logic
+});
+
+module.exports.handler = serverless(app); 
