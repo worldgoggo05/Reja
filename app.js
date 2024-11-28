@@ -39,16 +39,22 @@ app.get("/author1", (req, res) => {
 // Create new item
 app.post ("/create-item", (req, res) => {
     console.log("User is logged in /create-item");
+    console.log("Step 2 : Frontend => to Backend"); //Step2
     console.log(req.body);
+
+    console.log("Step 3 : Backend => to Database"); //Step3
     const new_reja = req.body.reja;
+
     db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
-        //console.log(data.ops);
-        // Check for errors
+        console.log("Step 4 : Database => to Backend"); //Step4
+        console.log(data.ops[0]);
+       
         if (err) {
             console.log(err);
             res.json({ error: "Xatolik yuz berdi!" });
         } else {
             // Send back the newly created item
+            console.log("Step 5 : Backend => to Frontend"); //Step5
             res.json({ 
                 _id: data.insertedId, 
                 reja: new_reja

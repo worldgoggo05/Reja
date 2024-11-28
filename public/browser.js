@@ -10,6 +10,7 @@ function itemTemplate(item) {
 }
 let createField = document.getElementById("create-field");
 document.getElementById("create-form").addEventListener("submit", function (e) {
+    console.log("Step 1 : Frontend => to Backend"); //Step1
     e.preventDefault();
     
     if (createField.value.trim() === "") return;  // Prevent empty submissions
@@ -17,6 +18,7 @@ document.getElementById("create-form").addEventListener("submit", function (e) {
     axios
         .post("/create-item", { reja: createField.value })
         .then((response) => {
+            console.log("Step 6 : Backend => to Frontend"); //Step6
             // Only add to the list if we get valid data back
             if (response.data._id) {
                 document.getElementById("item-list").insertAdjacentHTML(
