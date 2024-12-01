@@ -10,7 +10,7 @@ function itemTemplate(item) {
 }
 let createField = document.getElementById("create-field");
 document.getElementById("create-form").addEventListener("submit", function (e) {
-    console.log("Step 1 : Frontend => to Backend"); //Step1
+    // Step 1: Frontend ma'lumotni Backendga yuboradi
     e.preventDefault();
     
     if (createField.value.trim() === "") return;  // Prevent empty submissions
@@ -18,8 +18,7 @@ document.getElementById("create-form").addEventListener("submit", function (e) {
     axios
         .post("/create-item", { reja: createField.value })
         .then((response) => {
-            console.log("Step 6 : Backend => to Frontend"); //Step6
-            // Only add to the list if we get valid data back
+            // Step 6: Frontend qabul qilib UI ni yangilaydi
             if (response.data._id) {
                 document.getElementById("item-list").insertAdjacentHTML(
                     "beforeend", 
@@ -53,9 +52,11 @@ document.addEventListener("click", function(e) {
     // Delete button
     if(e.target.classList.contains("btn-delete")) {
         if(confirm("O'chirishni xohlaysizmi?")) {
+            // Step 1: Frontend ma'lumotni Backendga yuboradi
             axios
                 .post("/delete-item", {id: e.target.getAttribute("data-id")})
                 .then((response) => {
+                    // Step 6: Frontend qabul qilib UI ni yangilaydi
                     if(response.data.success) {
                         e.target.parentElement.parentElement.remove();
                     }
@@ -74,12 +75,14 @@ document.addEventListener("click", function(e) {
         );
         
         if(userInput) {
+            // Step 1: Frontend ma'lumotni Backendga yuboradi
             axios
                 .post("/edit-item", {
                     id: e.target.getAttribute("data-id"),
                     new_reja: userInput
                 })
                 .then((response) => {
+                    // Step 6: Frontend qabul qilib UI ni yangilaydi
                     if(response.data.success) {
                         e.target.parentElement.parentElement.querySelector(
                             ".item-text"

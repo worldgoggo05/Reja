@@ -39,22 +39,21 @@ app.get("/author1", (req, res) => {
 // Create new item
 app.post ("/create-item", (req, res) => {
     console.log("User is logged in /create-item");
-    console.log("Step 2 : Frontend => to Backend"); //Step2
+    // Step 2: Backend qabul qiladi
     console.log(req.body);
 
-    console.log("Step 3 : Backend => to Database"); //Step3
+    // Step 3: Backend ma'lumotni Databasega yuboradi
     const new_reja = req.body.reja;
 
     db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
-        console.log("Step 4 : Database => to Backend"); //Step4
+        // Step 4: Database qayta ishlab Backendga qaytaradi
         console.log(data.ops[0]);
        
         if (err) {
             console.log(err);
             res.json({ error: "Xatolik yuz berdi!" });
         } else {
-            // Send back the newly created item
-            console.log("Step 5 : Backend => to Frontend"); //Step5
+            // Step 5: Backend qayta ishlab Frontendga yuboradi
             res.json({ 
                 _id: data.insertedId, 
                 reja: new_reja
@@ -91,12 +90,18 @@ app.post("/delete-all", (req, res) => {
             res.json({ success: true });
         }
     });
-});
+}); 
+
+//---------------
 
 // Delete single item
 app.post("/delete-item", (req, res) => {
+    // Step 2: Backend o'chirish so'rovini qabul qiladi
     const id = new mongodb.ObjectId(req.body.id);
+    
+    // Step 3: Backend ma'lumotni Databasega yuboradi
     db.collection("plans").deleteOne({_id: id}, (err, data) => {
+        // Step 4-5: Database qayta ishlaydi va Backend Frontendga yuboradi
         if(err) {
             console.log(err);
             res.json({error: "Ochirishda xatolik yuz berdi"});
@@ -108,12 +113,16 @@ app.post("/delete-item", (req, res) => {
 
 // Edit/Update item
 app.post("/edit-item", (req, res) => {
+    // Step 2: Backend tahrirlash so'rovini qabul qiladi
     const id = new mongodb.ObjectId(req.body.id);
+    
+    // Step 3: Backend ma'lumotni Databasega yuboradi
     db.collection("plans").findOneAndUpdate(
         {_id: id},
         {$set: {reja: req.body.new_reja}},
         {returnDocument: 'after'},
         (err, data) => {
+            // Step 4-5: Database qayta ishlaydi va Backend Frontendga yuboradi
             if(err) {
                 console.log(err);
                 res.json({error: "Ozgartirishda xatolik yuz berdi"});
