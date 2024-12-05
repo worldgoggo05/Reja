@@ -9,19 +9,18 @@ console.log(findD('hello')) // true (because of 'll')
 
 //Solution 2 - Using Loop Comparison
 function dbChars(str) {
-    // Loop through string, stopping one character before the end
-    // because we're comparing current char with next char
+    // str.length-1 ensures we don't go out of bounds when checking next character
     for (let i = 0; i < str.length - 1; i++) {
-        // Compare current character with the next character
-        // If they're the same, we found a double character
+        // str[i]     - current character
+        // str[i+1]   - next character
+        // Check if current and next characters are identical
         if (str[i] == str[i + 1]) {
-            return true
+            return true   
         }
     }
-    // If we complete the loop without finding doubles, return false
-    return false
+    return false    
 }
-console.log(dbChars('hello')) // true (because of 'll')
+console.log(dbChars('hello')) //true 
 
 
 

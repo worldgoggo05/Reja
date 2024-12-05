@@ -1,0 +1,6 @@
+Node.js-dagi modullar proyektimiz davomida davomida qayta ishlatilishi mumkin bo'lgan (encapsulated) kod bloklaridir.
+Ushbu modullar funktsiyalar, ob'ektlar va variabllarni o'z ichiga olishi mumkin
+
+Core  Package Modullar - kompyuterda bor , o'rnatilgan modullar
+External Package Modullar- o'zimiz o'rnatishimiz kerak bo'lgan modullar.
+File Modullar - o'zimizni terminalda yaratib , boshqa filega export qilib ishlatishimiz bo'lgan modullar
